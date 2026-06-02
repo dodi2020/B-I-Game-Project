@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Gay Game Project"
+run/main_scene="uid://dpqutdiecksxb"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,6 +23,10 @@ project/assembly_name="Gay Game Project"
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_mcp_enhanced/plugin.cfg")
 
 [physics]
 
