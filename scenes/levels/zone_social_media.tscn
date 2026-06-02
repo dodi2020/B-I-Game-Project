@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://zonesocialmedia001"]
+
+[ext_resource type="PackedScene" uid="uid://xhehvurmt1t" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://camera2d001" path="res://scenes/objects/camera_2d.tscn" id="2_camera"]
+[ext_resource type="PackedScene" uid="uid://portal001" path="res://scenes/objects/portal.tscn" id="3_portal"]
+[ext_resource type="PackedScene" uid="uid://enemybase001" path="res://scenes/enemies/computer_virus.tscn" id="4_enemy"]
+[ext_resource type="PackedScene" uid="uid://datacookie001" path="res://scenes/pickups/data_cookie.tscn" id="5_cookie"]
+[ext_resource type="PackedScene" uid="uid://healthrestore001" path="res://scenes/pickups/health_restore.tscn" id="6_health"]
+[ext_resource type="PackedScene" uid="uid://upgradepickup001" path="res://scenes/pickups/upgrade_pickup.tscn" id="7_upgrade"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bounds"]
+size = Vector2(2500, 1200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(2500, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(400, 40)
+
+[node name="ZoneSocialMedia" type="Node2D"]
+
+[node name="LevelBounds" type="Area2D" parent="." groups=["level_bounds"]]
+position = Vector2(1250, 600)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBounds"]
+shape = SubResource("RectangleShape2D_bounds")
+debug_color = Color(0.0, 0.6, 0.7, 0.1)
+
+[node name="StaticGeometry" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="StaticGeometry"]
+position = Vector2(1250, 1050)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticGeometry/Floor"]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="Visual" type="ColorRect" parent="StaticGeometry/Floor"]
+offset_left = -1250.0
+offset_top = -40.0
+offset_right = 1250.0
+offset_bottom = 40.0
+color = Color(0.12, 0.12, 0.16, 1.0)
+
+[node name="VisualNeonBorder" type="ColorRect" parent="StaticGeometry/Floor"]
+offset_left = -1250.0
+offset_top = -43.0
+offset_right = 1250.0
+offset_bottom = -40.0
+color = Color(0.0, 1.0, 1.0, 1.0)
+
+[node name="Platform1" type="StaticBody2D" parent="StaticGeometry"]
+position = Vector2(600, 800)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticGeometry/Platform1"]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Visual" type="ColorRect" parent="StaticGeometry/Platform1"]
+offset_left = -200.0
+offset_top = -20.0
+offset_right = 200.0
+offset_bottom = 20.0
+color = Color(0.16, 0.16, 0.22, 1.0)
+
+[node name="VisualNeon" type="ColorRect" parent="StaticGeometry/Platform1"]
+offset_left = -200.0
+offset_top = -22.0
+offset_right = 200.0
+offset_bottom = -20.0
+color = Color(1.0, 0.0, 0.6, 1.0)
+
+[node name="Platform2" type="StaticBody2D" parent="StaticGeometry"]
+position = Vector2(1400, 700)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticGeometry/Platform2"]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Visual" type="ColorRect" parent="StaticGeometry/Platform2"]
+offset_left = -200.0
+offset_top = -20.0
+offset_right = 200.0
+offset_bottom = 20.0
+color = Color(0.16, 0.16, 0.22, 1.0)
+
+[node name="VisualNeon" type="ColorRect" parent="StaticGeometry/Platform2"]
+offset_left = -200.0
+offset_top = -22.0
+offset_right = 200.0
+offset_bottom = -20.0
+color = Color(1.0, 0.0, 0.6, 1.0)
+
+[node name="Platform3" type="StaticBody2D" parent="StaticGeometry"]
+position = Vector2(2000, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticGeometry/Platform3"]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Visual" type="ColorRect" parent="StaticGeometry/Platform3"]
+offset_left = -200.0
+offset_top = -20.0
+offset_right = 200.0
+offset_bottom = 20.0
+color = Color(0.16, 0.16, 0.22, 1.0)
+
+[node name="VisualNeon" type="ColorRect" parent="StaticGeometry/Platform3"]
+offset_left = -200.0
+offset_top = -22.0
+offset_right = 200.0
+offset_bottom = -20.0
+color = Color(1.0, 0.0, 0.6, 1.0)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." groups=["tilemap_layer"]]
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(200, 950)
+
+[node name="Camera2D" parent="." instance=ExtResource("2_camera")]
+position = Vector2(200, 950)
+
+[node name="Pickups" type="Node2D" parent="."]
+
+[node name="DataCookie1" parent="Pickups" instance=ExtResource("5_cookie")]
+position = Vector2(600, 720)
+
+[node name="DataCookie2" parent="Pickups" instance=ExtResource("5_cookie")]
+position = Vector2(1400, 620)
+
+[node name="HealthRestore" parent="Pickups" instance=ExtResource("6_health")]
+position = Vector2(2000, 420)
+
+[node name="VpnUpgrade" parent="Pickups" instance=ExtResource("7_upgrade")]
+position = Vector2(1000, 980)
+upgrade_id = "vpn_tunnel"
+
+[node name="AdBlockerUpgrade" parent="Pickups" instance=ExtResource("7_upgrade")]
+position = Vector2(1500, 980)
+upgrade_id = "ad_blocker"
+
+[node name="IncognitoUpgrade" parent="Pickups" instance=ExtResource("7_upgrade")]
+position = Vector2(1800, 980)
+upgrade_id = "incognito_cloak"
+
+[node name="AutoFillUpgrade" parent="Pickups" instance=ExtResource("7_upgrade")]
+position = Vector2(2200, 980)
+upgrade_id = "auto_fill"
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="ComputerVirus1" parent="Enemies" instance=ExtResource("4_enemy")]
+position = Vector2(800, 740)
+
+[node name="ComputerVirus2" parent="Enemies" instance=ExtResource("4_enemy")]
+position = Vector2(1600, 640)
+
+[node name="Portal" parent="." instance=ExtResource("3_portal")]
+position = Vector2(2400, 950)
+target_scene = "res://scenes/levels/zone_social_media.tscn"
+portal_color = Color(0.0, 1.0, 0.8, 1.0)

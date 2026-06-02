@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://xhehvurmt1t"]
+
+[ext_resource type="Script" uid="uid://b3jfbixr4oc12" path="res://scripts/player.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://vlb8vr0dyifv" path="res://scripts/components/health_component.gd" id="2_health"]
+[ext_resource type="Script" uid="uid://dd7cv51ylrpqe" path="res://scripts/combat/hitbox.gd" id="3_hitbox"]
+[ext_resource type="Script" uid="uid://c8eaakknrynfs" path="res://scripts/combat/hurtbox.gd" id="4_hurtbox"]
+[ext_resource type="Texture2D" uid="uid://buumwnmuj10pp" path="res://icon.svg" id="5_texture"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(120, 114)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurtbox"]
+size = Vector2(120, 115)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sword"]
+size = Vector2(129, 45)
+
+[node name="Player" type="CharacterBody2D" unique_id=1155193835 groups=["player"]]
+script = ExtResource("1_script")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=125773913]
+texture = ExtResource("5_texture")
+
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=660447345]
+position = Vector2(-2, 1)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=770826503]
+script = ExtResource("2_health")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=530399150]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_hurtbox")
+
+[node name="HurtboxShape" type="CollisionShape2D" parent="Hurtbox" unique_id=1255064715]
+position = Vector2(-1, 0.5)
+shape = SubResource("RectangleShape2D_hurtbox")
+
+[node name="SwordHitbox" type="Area2D" parent="." unique_id=1016819945]
+position = Vector2(56, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_hitbox")
+damage = 15
+knockback_force = 250.0
+
+[node name="SwordShape" type="CollisionShape2D" parent="SwordHitbox" unique_id=1964183467]
+position = Vector2(24.5, 2.5)
+shape = SubResource("RectangleShape2D_sword")
+
+[node name="DownStrikeRay" type="RayCast2D" parent="." unique_id=1524191069]
+target_position = Vector2(0, 80)

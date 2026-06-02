@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://dpqutdiecksxb"]
 
-[ext_resource type="Script" uid="uid://75voa3xquhi5" path="res://player.gd" id="1_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://buumwnmuj10pp" path="res://icon.svg" id="2_h2yge"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
-size = Vector2(128, 128)
+[ext_resource type="PackedScene" uid="uid://xhehvurmt1t" path="res://scenes/player.tscn" id="1_player_scene"]
+[ext_resource type="PackedScene" uid="uid://hxv5kmphgrwy" path="res://scenes/pickups/upgrade_pickup.tscn" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://d1gme0dsegghk" path="res://scenes/pickups/health_restore.tscn" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://datacookie001" path="res://scenes/pickups/data_cookie.tscn" id="4_7mycd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
 size = Vector2(1000, 50)
@@ -19,20 +18,13 @@ offset_left = 250.0
 offset_top = 50.0
 offset_right = 750.0
 offset_bottom = 100.0
-theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
+theme_override_colors/font_color = Color(0.9, 0.9, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = "Antigravity & Godot pairs!"
 horizontal_alignment = 1
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=816876622]
-position = Vector2(500, 200)
-script = ExtResource("1_0xm2m")
-
-[node name="Sprite" type="Sprite2D" parent="Player" unique_id=907888587]
-texture = ExtResource("2_h2yge")
-
-[node name="Collider" type="CollisionShape2D" parent="Player" unique_id=744055188]
-shape = SubResource("RectangleShape2D_1bvp3")
+[node name="Player" parent="." unique_id=30262540 instance=ExtResource("1_player_scene")]
+position = Vector2(499, 201)
 
 [node name="Platform" type="StaticBody2D" parent="." unique_id=277493035]
 position = Vector2(500, 500)
@@ -58,5 +50,13 @@ offset_left = -150.0
 offset_top = -20.0
 offset_right = 150.0
 offset_bottom = 20.0
-color = Color(0.70196078, 0.29803922, 0.29803922, 1)
+color = Color(0.7019608, 0.29803923, 0.29803923, 1)
 
+[node name="UpgradePickup" parent="." unique_id=825828324 instance=ExtResource("2_1bvp3")]
+position = Vector2(145, 363)
+
+[node name="HealthRestore" parent="." unique_id=1659505599 instance=ExtResource("3_lquwl")]
+position = Vector2(712, 433)
+
+[node name="DataCookie" parent="." unique_id=478532165 instance=ExtResource("4_7mycd")]
+position = Vector2(30, 445)

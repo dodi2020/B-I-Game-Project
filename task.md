@@ -1,37 +1,60 @@
 # task.md
 
 ## Core Foundation
-- [ ] Initialize Godot project and set window resolution for 2D pixel art.
-- [ ] Create folder structure for scripts, scenes, assets, and UI.
-- [ ] Setup the Global GameState Autoload.
+- [x] Initialize Godot project and set window resolution for 2D pixel art.
+- [x] Create folder structure for scripts, scenes, assets, and UI.
+- [x] Setup the Global GameState Autoload.
 
 ## Player Mechanics
-- [ ] Create Player scene with CharacterBody2D.
-- [ ] Code basic physics (gravity, run, jump).
-- [ ] Add basic placeholder animations.
+- [x] Create Player scene with CharacterBody2D.
+- [x] Code basic physics (gravity, run, jump).
+- [x] Add basic placeholder animations.
 
 ## Combat System
-- [ ] Create Health component for player and enemies.
-- [ ] Implement primary cursor sword attack (hitbox setup).
-- [ ] Implement downward strike and bounce logic.
+- [x] Create Health component for player and enemies.
+- [x] Implement primary cursor sword attack (hitbox setup).
+- [x] Implement downward strike and bounce logic using raycasts.
 
 ## Enemy AI
-- [ ] Create base Enemy scene.
-- [ ] Build patrol logic for the standard computer virus enemy.
-- [ ] Add death logic and Data Cookie drop spawning.
+- [x] Create base Enemy scene.
+- [x] Build patrol logic for the standard computer virus enemy.
+- [x] Add death logic and Data Cookie drop spawning.
+
+## Pickups and Interactables
+- [x] Create Data Cookie pickup scene.
+- [x] Create Health Restore pickup scene.
+- [x] Create Upgrade/Extension pickup scene (supports VPN Tunnel, Ad Blocker, Incognito Cloak, Auto Fill).
 
 ## Upgrade Implementation
-- [ ] VPN Tunnel: Implement dash movement logic.
-- [ ] Ad Blocker: Implement temporary invincibility shield.
-- [ ] Incognito Cloak: Implement enemy detection avoidance.
-- [ ] Auto Fill: Implement pull logic for distant items.
+- [x] VPN Tunnel: Implement dash movement logic.
+- [x] Ad Blocker: Implement temporary invincibility shield.
+- [x] Incognito Cloak: Implement enemy detection avoidance.
+- [x] Auto Fill: Implement pull logic for distant items.
 
 ## World and Level Design
-- [ ] Setup base TileMapLayer for the first zone.
-- [ ] Create zone transition areas to move between rooms.
-- [ ] Implement a dynamic camera that follows the player but respects room bounds.
+- [x] Setup base TileMapLayer for the first zone.
+- [x] Create zone transition areas to move between rooms.
+- [x] Implement a dynamic camera that follows the player but respects room bounds.
 
-## UI and Story
+## Controls and Tutorial Setup
+- [x] Create a playable Tutorial Level scene guiding player mechanics.
+- [x] Configure boot settings to launch the Tutorial scene first.
+- [x] Standardize movement input using WASD and Space bar controls.
+- [x] Code bi-directional look-checking (W/S) states for future gameplay use.
+- [x] Refactor Player constants to modular @export variables for Inspector tuning.
+
+## The Offline Mini Game
+- [x] Create a separate scene for the No Internet screen.
+- [x] Build the endless runner mechanics with the crocodile and cacti.
+- [x] Add logic to spawn and collect Cookies in this mode.
+- [x] Add the WiFi Password goal to trigger a respawn back to the main game.
+
+## UI, NPC, and Story
 - [ ] Build the main HUD (Health, Data Cookies).
 - [ ] Create the Memory Log UI to read story files.
 - [ ] Build a basic pause menu.
+- [ ] Create the Bluetooth helper NPC scene.
+- [ ] Implement a shop menu where Cookies can buy hints and items.
+- [ ] Code the Alt F2 half screen glitch using a CanvasLayer and custom shader.
+- [ ] Create the quest logic to fix the broken screen with the helper.
+- [ ] Create a Keybind settings menu for custom keyboard layouts (remapping controls).

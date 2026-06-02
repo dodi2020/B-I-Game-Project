@@ -1,0 +1,241 @@
+[gd_scene format=3 uid="uid://dqkc4vqk0hmcm"]
+
+[ext_resource type="PackedScene" uid="uid://xhehvurmt1t" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://camera2d001" path="res://scenes/objects/camera_2d.tscn" id="2_camera"]
+[ext_resource type="PackedScene" uid="uid://portal001" path="res://scenes/objects/portal.tscn" id="3_portal"]
+[ext_resource type="PackedScene" uid="uid://enemybase001" path="res://scenes/enemies/computer_virus.tscn" id="4_enemy"]
+[ext_resource type="PackedScene" uid="uid://datacookie001" path="res://scenes/pickups/data_cookie.tscn" id="5_cookie"]
+[ext_resource type="PackedScene" uid="uid://d1gme0dsegghk" path="res://scenes/pickups/health_restore.tscn" id="6_health"]
+[ext_resource type="PackedScene" uid="uid://hxv5kmphgrwy" path="res://scenes/pickups/upgrade_pickup.tscn" id="7_upgrade"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bounds"]
+size = Vector2(3000, 1200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(3000, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(80, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(400, 40)
+
+[node name="TutorialLevel" type="Node2D" unique_id=1873411187]
+
+[node name="LevelBounds" type="Area2D" parent="." unique_id=272931526 groups=["level_bounds"]]
+position = Vector2(1500, 600)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBounds" unique_id=455440878]
+shape = SubResource("RectangleShape2D_bounds")
+debug_color = Color(0, 0.6, 0.7, 0.1)
+
+[node name="StaticGeometry" type="Node2D" parent="." unique_id=1527484674]
+
+[node name="Floor" type="StaticBody2D" parent="StaticGeometry" unique_id=1386257853]
+position = Vector2(1500, 1050)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticGeometry/Floor" unique_id=156948616]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="Visual" type="ColorRect" parent="StaticGeometry/Floor" unique_id=261754092]
+offset_left = -1500.0
+offset_top = -40.0
+offset_right = 1500.0
+offset_bottom = 40.0
+color = Color(0.12, 0.12, 0.16, 1)
+
+[node name="VisualNeonBorder" type="ColorRect" parent="StaticGeometry/Floor" unique_id=2016194376]
+offset_left = -1500.0
+offset_top = -43.0
+offset_right = 1500.0
+offset_bottom = -40.0
+color = Color(0, 1, 1, 1)
+
+[node name="EnclosureWall" type="StaticBody2D" parent="StaticGeometry" unique_id=680383806]
+position = Vector2(1800, 750)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticGeometry/EnclosureWall" unique_id=355996787]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="Visual" type="ColorRect" parent="StaticGeometry/EnclosureWall" unique_id=1812127393]
+offset_left = -40.0
+offset_top = -300.0
+offset_right = 40.0
+offset_bottom = 300.0
+color = Color(0.16, 0.16, 0.22, 1)
+
+[node name="Platform1" type="StaticBody2D" parent="StaticGeometry" unique_id=1406875819]
+position = Vector2(600, 800)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticGeometry/Platform1" unique_id=483105843]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Visual" type="ColorRect" parent="StaticGeometry/Platform1" unique_id=1938097638]
+offset_left = -200.0
+offset_top = -20.0
+offset_right = 200.0
+offset_bottom = 20.0
+color = Color(0.16, 0.16, 0.22, 1)
+
+[node name="VisualNeon" type="ColorRect" parent="StaticGeometry/Platform1" unique_id=1292673148]
+offset_left = -200.0
+offset_top = -22.0
+offset_right = 200.0
+offset_bottom = -20.0
+color = Color(1, 0, 0.6, 1)
+
+[node name="Platform2" type="StaticBody2D" parent="StaticGeometry" unique_id=775068436]
+position = Vector2(1200, 700)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticGeometry/Platform2" unique_id=1656645890]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Visual" type="ColorRect" parent="StaticGeometry/Platform2" unique_id=2144573980]
+offset_left = -200.0
+offset_top = -20.0
+offset_right = 200.0
+offset_bottom = 20.0
+color = Color(0.16, 0.16, 0.22, 1)
+
+[node name="VisualNeon" type="ColorRect" parent="StaticGeometry/Platform2" unique_id=487029789]
+offset_left = -200.0
+offset_top = -22.0
+offset_right = 200.0
+offset_bottom = -20.0
+color = Color(1, 0, 0.6, 1)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1396865839 groups=["tilemap_layer"]]
+
+[node name="Player" parent="." unique_id=447941826 instance=ExtResource("1_player")]
+position = Vector2(150, 950)
+
+[node name="Camera2D" parent="." unique_id=1476648287 instance=ExtResource("2_camera")]
+position = Vector2(150, 950)
+
+[node name="GuideLabels" type="Node2D" parent="." unique_id=1597307090]
+
+[node name="Title" type="Label" parent="GuideLabels" unique_id=1409719985]
+offset_left = 50.0
+offset_top = 150.0
+offset_right = 950.0
+offset_bottom = 230.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.3, 0.3, 0.5)
+theme_override_font_sizes/font_size = 48
+text = "CYBER-BROWSER TUTORIAL"
+horizontal_alignment = 1
+
+[node name="Movement" type="Label" parent="GuideLabels" unique_id=1304802764]
+offset_left = 50.0
+offset_top = 400.0
+offset_right = 500.0
+offset_bottom = 500.0
+theme_override_colors/font_color = Color(0.9, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "BASIC MOVEMENT
+• A / D : Move Left / Right
+• SPACE : Jump"
+
+[node name="CrouchStealth" type="Label" parent="GuideLabels" unique_id=1411801902]
+offset_left = 500.0
+offset_top = 400.0
+offset_right = 1000.0
+offset_bottom = 550.0
+theme_override_colors/font_color = Color(0.8, 0.4, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "INCOGNITO CLOAK
+• Unlock the Purple pickup.
+• Hold S on the floor to go translucent.
+• Avoids all damage from Viruses!"
+
+[node name="Dash" type="Label" parent="GuideLabels" unique_id=467766801]
+offset_left = 50.0
+offset_top = 580.0
+offset_right = 500.0
+offset_bottom = 700.0
+theme_override_colors/font_color = Color(0, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "VPN TUNNEL
+• Unlock the Cyan pickup.
+• Press Space in mid-air or during movement to DASH!"
+
+[node name="Shield" type="Label" parent="GuideLabels" unique_id=41354527]
+offset_left = 500.0
+offset_top = 580.0
+offset_right = 1000.0
+offset_bottom = 700.0
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 22
+text = "AD BLOCKER
+• Unlock the Red pickup.
+• Press Tab to trigger a temporary Invincibility Shield!"
+
+[node name="DownwardStrike" type="Label" parent="GuideLabels" unique_id=527826315]
+offset_left = 1003.0
+offset_top = 192.0
+offset_right = 1603.0
+offset_bottom = 312.0
+theme_override_colors/font_color = Color(1, 0.8, 0.2, 1)
+theme_override_font_sizes/font_size = 22
+text = "DOWNWARD STRIKE
+• Press S while in mid-air.
+• Plummets down and bounces on enemies!"
+
+[node name="Economy" type="Label" parent="GuideLabels" unique_id=642235606]
+offset_left = 1029.0
+offset_top = 391.0
+offset_right = 1629.0
+offset_bottom = 541.0
+theme_override_colors/font_color = Color(0.2, 1, 0.2, 1)
+theme_override_font_sizes/font_size = 22
+text = "PICKUPS
+• Data Cookie (Yellow): Currency drop.
+• Health Restore (Pink): Heals damage.
+• Auto-Fill (Green): Magnets cookies to you!"
+
+[node name="PortalGuide" type="Label" parent="GuideLabels" unique_id=1305579129]
+offset_left = 2200.0
+offset_top = 700.0
+offset_right = 2750.0
+offset_bottom = 800.0
+theme_override_colors/font_color = Color(0, 1, 0.8, 1)
+theme_override_font_sizes/font_size = 24
+text = "Enter the Portal when ready
+to start the game!"
+horizontal_alignment = 1
+
+[node name="Pickups" type="Node2D" parent="." unique_id=1641952533]
+
+[node name="DataCookie" parent="Pickups" unique_id=176697730 instance=ExtResource("5_cookie")]
+position = Vector2(600, 720)
+
+[node name="HealthRestore" parent="Pickups" unique_id=1293932198 instance=ExtResource("6_health")]
+position = Vector2(1200, 620)
+
+[node name="VpnUpgrade" parent="Pickups" unique_id=1038617834 instance=ExtResource("7_upgrade")]
+position = Vector2(400, 980)
+
+[node name="AdBlockerUpgrade" parent="Pickups" unique_id=714177577 instance=ExtResource("7_upgrade")]
+position = Vector2(650, 980)
+upgrade_id = "ad_blocker"
+
+[node name="IncognitoUpgrade" parent="Pickups" unique_id=985968130 instance=ExtResource("7_upgrade")]
+position = Vector2(900, 980)
+upgrade_id = "incognito_cloak"
+
+[node name="AutoFillUpgrade" parent="Pickups" unique_id=2124828886 instance=ExtResource("7_upgrade")]
+position = Vector2(1150, 980)
+upgrade_id = "auto_fill"
+
+[node name="Enemies" type="Node2D" parent="." unique_id=278601840]
+
+[node name="ComputerVirus" parent="Enemies" unique_id=2067989248 instance=ExtResource("4_enemy")]
+position = Vector2(1500, 980)
+patrol_distance = 100.0
+
+[node name="Portal" parent="." unique_id=1164807697 instance=ExtResource("3_portal")]
+position = Vector2(2800, 950)
+target_scene = "res://scenes/levels/zone_social_media.tscn"
+portal_color = Color(0, 1, 0.8, 1)

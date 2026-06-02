@@ -11,9 +11,17 @@ config_version=5
 [application]
 
 config/name="Gay Game Project"
-run/main_scene="uid://dpqutdiecksxb"
+run/main_scene="res://scenes/levels/tutorial.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameState="*res://scripts/global_state.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
@@ -28,10 +36,17 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/godot_mcp_enhanced/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://addons/": "red"
+}
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
