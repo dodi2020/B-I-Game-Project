@@ -1,19 +1,61 @@
 [gd_scene format=3 uid="uid://portal001"]
 
-[ext_resource type="Script" path="res://scripts/objects/portal.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://buumwnmuj10pp" path="res://icon.svg" id="2_texture"]
+[ext_resource type="Script" uid="uid://djepq2cj2fc74" path="res://scripts/objects/portal.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://clfxpegtpuk2w" path="res://Aseprite/Exports/Portal.png" id="2_gd70c"]
+
+[sub_resource type="Animation" id="Animation_gd70c"]
+resource_name = "Portal Whirl"
+length = 0.75
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_h5gno"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_osqbb"]
+_data = {
+&"Portal Whirl": SubResource("Animation_gd70c"),
+&"RESET": SubResource("Animation_h5gno")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_portal"]
 radius = 35.0
 
-[node name="Portal" type="Area2D"]
+[node name="Portal" type="Area2D" unique_id=336430720]
 collision_layer = 0
-collision_mask = 1
 script = ExtResource("1_script")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_texture")
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1737515751]
 scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_gd70c")
+hframes = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" unique_id=1948615]
+libraries/ = SubResource("AnimationLibrary_osqbb")
+autoplay = &"Portal Whirl"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1814360737]
 shape = SubResource("CircleShape2D_portal")

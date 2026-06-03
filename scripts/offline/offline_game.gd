@@ -12,6 +12,14 @@ extends Node2D
 @export var cookie_spawn_chance: float = 0.45  # Chance to spawn a cookie with a cactus
 @export var win_score: float = 300.0  # Meters to survive before WiFi Password spawns
 
+@export_group("Parallax Background")
+@export var far_scroll_factor: float = 0.15
+@export var near_scroll_factor: float = 0.5
+@export var far_color: Color = Color(0.12, 0.4, 0.6, 0.2)  # Dim blue-cyan drift
+@export var near_color: Color = Color(1.0, 0.2, 0.6, 0.35)  # Brighter pink panels
+@export var far_elements_count: int = 15
+@export var near_elements_count: int = 6
+
 @export_group("Hazard Settings")
 @export var restart_on_hit: bool = true  # If true, resets metric score to 0 and reboots game.
 @export var hit_distance_penalty: float = 50.0  # Meter deduction penalty if restart_on_hit is false.
@@ -33,6 +41,8 @@ var DATA_COOKIE_SCENE: PackedScene = null
 @onready var game_over_panel = $UI/GameOverPanel
 @onready var cacti_container = $CactiContainer
 @onready var items_container = $ItemsContainer
+@onready var far_bg_container = $FarBgContainer
+@onready var near_bg_container = $NearBgContainer
 
 func _ready() -> void:
 	DATA_COOKIE_SCENE = load("res://scenes/pickups/data_cookie.tscn")
@@ -40,6 +50,7 @@ func _ready() -> void:
 	# Put croc at start ground level
 	croc.position = Vector2(150, 480)
 	_croc_velocity = Vector2.ZERO
+	_setup_parallax_background()
 
 func _physics_process(delta: float) -> void:
 	if _is_game_over:
@@ -94,6 +105,9 @@ func _physics_process(delta: float) -> void:
 
 	# 5. Move obstacles and check collisions
 	_scroll_objects(delta)
+
+	# 6. Scroll Parallax Backgrounds
+	_scroll_parallax(delta)
 
 func _spawn_cactus() -> void:
 	var cactus = Area2D.new()
@@ -239,3 +253,48 @@ func _trigger_win() -> void:
 		if game_state:
 			game_state.reconnect_to_internet()
 	)
+
+# ─── Parallax Background Methods ──────────────────────────────────────────────
+func _setup_parallax_background() -> void:
+	# Clear any old children
+	for child in far_bg_container.get_children():
+		child.queue_free()
+	for child in near_bg_container.get_children():
+		child.queue_free()
+		
+	# Spawn Far Background elements (tiny drifting cyber-stars)
+	for i in far_elements_count:
+		var element = Sprite2D.new()
+		element.texture = load("res://icon.svg")
+		element.modulate = far_color
+		element.position = Vector2(randf_range(0, 1100), randf_range(50, 420))
+		element.scale = Vector2(randf_range(0.08, 0.15), randf_range(0.08, 0.15))
+		far_bg_container.add_child(element)
+		
+	# Spawn Near Background elements (medium floating panels)
+	for i in near_elements_count:
+		var element = Sprite2D.new()
+		element.texture = load("res://icon.svg")
+		element.modulate = near_color
+		element.position = Vector2(randf_range(0, 1100), randf_range(80, 400))
+		element.scale = Vector2(randf_range(0.25, 0.4), randf_range(0.25, 0.4))
+		element.rotation = randf_range(0, PI)
+		near_bg_container.add_child(element)
+
+func _scroll_parallax(delta: float) -> void:
+	if _is_game_over:
+		return
+		
+	# Scroll Far Background (Slowly)
+	for child in far_bg_container.get_children():
+		child.position.x -= scroll_speed * far_scroll_factor * delta
+		if child.position.x < -150:
+			child.position.x = 1150
+			child.position.y = randf_range(50, 420)
+			
+	# Scroll Near Background (Faster)
+	for child in near_bg_container.get_children():
+		child.position.x -= scroll_speed * near_scroll_factor * delta
+		if child.position.x < -150:
+			child.position.x = 1150
+			child.position.y = randf_range(80, 400)
